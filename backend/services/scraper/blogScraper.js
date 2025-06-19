@@ -137,28 +137,36 @@ function buildItem({ title, markdown, url, contentType = 'blog' }) {
  * Scrape and build items from a list of blog URLs
  */
 async function scrapeBlogs(urls = []) {
-  const items = []
+  const fetchTasks = urls.map(async (url) => {
+    try {
+      console.log(`🟡 Scraping: ${url}`)
 
-  for (const url of urls) {
-    console.log(`🟡 Scraping: ${url}`)
+      const html = await fetchHTML(url)
+      if (!html) return null
 
-    const html = await fetchHTML(url)
-    if (!html) continue
+      const { title, htmlContent } = extractContent(html, url)
+      const markdown = convertToMarkdown(htmlContent)
 
-    const { title, htmlContent } = extractContent(html, url)
-    const markdown = convertToMarkdown(htmlContent)
+      if (!markdown || markdown.length < 50) {
+        console.warn(`⚠️ Skipping ${url} due to insufficient content`)
+        return null
+      }
 
-    if (!markdown || markdown.length < 50) {
-      console.warn(`⚠️ Skipping ${url} due to insufficient content`)
-      continue
+      return buildItem({ title, markdown, url })
+    } catch (err) {
+      console.error(`❌ Error processing ${url}:`, err.message)
+      return null
     }
+  })
 
-    const item = buildItem({ title, markdown, url })
-    items.push(item)
-  }
+  const results = await Promise.all(fetchTasks)
+
+  // Filter out failed/null entries
+  const items = results.filter(Boolean)
 
   return items
 }
+
 
 module.exports = {
   scrapeBlogs
