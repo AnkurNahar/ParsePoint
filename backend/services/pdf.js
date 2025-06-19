@@ -1,4 +1,4 @@
-const { processPdfFile } = require('../scraper/pdfProcessor')
+const { processPdfFile } = require('../services/scraper/pdfProcessor')
 const { buildOutput, saveToJsonFile, saveToMarkdown } = require('./output')
 const fs = require('fs')
 

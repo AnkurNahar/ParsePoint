@@ -1,4 +1,4 @@
-const { scrapeBlogs } = require('../scraper/blogScraper')
+const { scrapeBlogs } = require('../services/scraper/blogScraper')
 const { buildOutput, saveToJsonFile, saveToMarkdown } = require('./output')
 
 exports.scrapeAndBuildOutput = async (urls) => {
