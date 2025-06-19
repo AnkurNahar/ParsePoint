@@ -9,33 +9,6 @@ const turndownService = new TurndownService()
 /**
  * Launch Puppeteer and get raw HTML
  */
-
-/* async function fetchHTML(url) {
-  try {
-    const browser = await puppeteer.launch({ headless: true })
-    const page = await browser.newPage()
-
-    // Block stylesheets, fonts, images
-    await page.setRequestInterception(true)
-    page.on('request', req => {
-      const blocked = ['stylesheet', 'font', 'image']
-      if (blocked.includes(req.resourceType())) {
-        req.abort()
-      } else {
-        req.continue()
-      }
-    })
-
-    await page.goto(url, { waitUntil: 'domcontentloaded', timeout: 60000 })
-    const html = await page.content()
-    await browser.close()
-    return html
-  } catch (err) {
-    console.error(`❌ Error fetching ${url}:`, err.message)
-    return null
-  }
-} */
-
 async function fetchHTML(url, requiredSelector = null) {
   // Try with node-fetch + JSDOM
   try {
