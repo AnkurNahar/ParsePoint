@@ -18,7 +18,7 @@ app.use('/api/download', downloadRoutes)
 
 // Health
 app.get('/', (req, res) => {
-  res.send('🚀 Aline Scraper API is running!')
+  res.send('🚀 ParsePoint APIs are running!')
 })
 
 app.listen(PORT, () => {

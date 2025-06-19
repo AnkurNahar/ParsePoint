@@ -55,7 +55,7 @@ export default function Home() {
 
   return (
     <main className="p-8 max-w-3xl mx-auto bg-white rounded-2xl shadow-xl mt-12 border border-purple-200">
-      <h2 className="text-4xl font-extrabold mb-10 text-center text-purple-700 drop-shadow">✨ Aline Scraper Interface</h2>
+      <h2 className="text-4xl font-extrabold mb-10 text-center text-purple-700 drop-shadow">✨ ParsePoint Interface</h2>
 
       <section className="mb-10">
         <h3 className="text-xl font-semibold mb-3 text-blue-800">📝 Blog Scraper</h3>
